@@ -6,6 +6,7 @@ import RatingImg from "../../assets/star.png";
 import ReviewImg from "../../assets/review.png";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
+import GlobalLoader from '../GlobalLoader/GlobalLoader'
 import {
   BarChart,
   Bar,
@@ -18,6 +19,7 @@ import {
   updateInstalledAppList,
   loadInstalledAppList,
 } from "../../Utilities/LocalStorage";
+import AppError from "../AppError/AppError";
 
 const AppsDetailsPage = () => {
   const { id } = useParams();
@@ -31,8 +33,8 @@ const AppsDetailsPage = () => {
     setInstalled(isInstalled);
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
-  if (!app) return <p>App not found</p>;
+  if (loading) return <GlobalLoader></GlobalLoader>
+  if (!app) return <AppError></AppError>
 
   const handleInstall = () => {
     updateInstalledAppList(app);
@@ -110,7 +112,7 @@ const AppsDetailsPage = () => {
           <div className="mt-5">
             <button
               onClick={handleInstall}
-              className={`btn font-bold text-white text-2xl transition-all duration-300 ${
+              className={`btn font-bold  text-white text-xl transition-all duration-300 ${
                 installed ? "bg-[#28a745]" : "bg-[#00D390]"
               }`}
               disabled={installed}

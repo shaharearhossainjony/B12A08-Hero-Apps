@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import useProducts from "../../Hooks/useProducts";
-import DownloadImg from "../../assets/downloadimg.png";
-import RatingImg from "../../assets/star.png";
 import TrendingAppsCard from "../TrendingAppsCard/TrendingAppsCard";
 import ErrorAppsImg from "../../assets/App-Error.png";
 import { useNavigate } from "react-router-dom";
@@ -60,7 +58,7 @@ const Apps = () => {
           <h2 className="text-3xl font-bold text-red-500">
             OPPS!! APP NOT FOUND
           </h2>
-          <p className="font-bold text-xl my-2 bg-gradient-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent">
+          <p className="font-bold text-center text-xl my-2 bg-gradient-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent">
             The App you are requesting is not found on our system. please try
             another apps!!
           </p>

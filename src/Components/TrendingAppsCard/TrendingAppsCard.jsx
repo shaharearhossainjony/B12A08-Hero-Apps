@@ -20,7 +20,7 @@ const TrendingAppsCard = ({ app }) => {
   return (
     <div
       onClick={() => navigate(`/apps/${app.id}`)}
-      className="card bg-base-100 shadow-xl hover:scale-105 transition ease-in-out mb-10 cursor-pointer"
+      className="card bg-base-100  shadow-xl hover:scale-105 transition ease-in-out mb-10 cursor-pointer"
     >
       <figure>
         <img className="p-2 rounded-xl" src={app.image} alt={app.title} />

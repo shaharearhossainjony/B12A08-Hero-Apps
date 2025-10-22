@@ -19,14 +19,16 @@ const Installation = () => {
   }, [sortOrder]);
 
   const sortApps = (apps, order) => {
-    if (order === "size-asc") {
-      return [...apps].sort((a, b) => a.size - b.size);
-    } else if (order === "size-desc") {
-      return [...apps].sort((a, b) => b.size - a.size);
+    if (order === "download-asc") {
+      return [...apps].sort((a, b) => a.downloads - b.downloads);
+    } else if (order === "download-desc") {
+      return [...apps].sort((a, b) => b.downloads - a.downloads);
     } else {
       return apps;
     }
+ 
   };
+
 
   const handleUninstall = (id, title) => {
     removeFromAppList(id);
@@ -69,8 +71,8 @@ const Installation = () => {
           onChange={(e) => setSortOrder(e.target.value)}
         >
           <option value="none">Sort by Size</option>
-          <option value="size-asc">Low → High</option>
-          <option value="size-desc">High → Low</option>
+          <option value="download-asc">Low → High</option>
+          <option value="download-desc">High → Low</option>
         </select>
       </div>
 

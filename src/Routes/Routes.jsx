@@ -28,10 +28,14 @@ const router = createBrowserRouter([
       {
         path : '/apps/:id',
         element : <AppsDetailsPage></AppsDetailsPage>
+      },
+      {
+        path : '*',
+        element : <ErrorPage></ErrorPage>
       }
 
     ],
   }
 ])
 
-export default router
+export default router;

@@ -12,15 +12,14 @@ const Home = () => {
   const trendingApps = products.slice(0, 8);
 
   const FormatNum = (number) => {
-  if (number >= 1000000) {
-    return (number / 1000000).toFixed(1).replace(/\.0$/, "") + "M+";
-  } else if (number >= 1000) {
-    return (number / 1000).toFixed(1).replace(/\.0$/, "") + "K+";
-  } else {
-    return number.toString();
-  }
-};
-  
+    if (number >= 1000000) {
+      return (number / 1000000).toFixed(1).replace(/\.0$/, "") + "M+";
+    } else if (number >= 1000) {
+      return (number / 1000).toFixed(1).replace(/\.0$/, "") + "K+";
+    } else {
+      return number.toString();
+    }
+  };
 
   return (
     <div>
@@ -59,14 +58,14 @@ const Home = () => {
       </div>
 
       {/* hero trusted section */}
-      <div className="bg-gradient-to-r from-[#632EE3] to-[#9F62F2] w-full h-full">
+      <div className="bg-gradient-to-r  from-[#632EE3] to-[#9F62F2] w-full h-full">
         <div>
           <h1 className="font-bold text-5xl text-white text-center py-5">
             Trusted by Millions, Built for You
           </h1>
         </div>
 
-        <div className="flex justify-evenly items-center md: mb-10 p-10">
+        <div className="flex flex-col sm:flex-row justify-evenly items-center mb-10 p-10 gap-6">
           <div className="text-center">
             <h6 className="pt-2 text-white">Total Downloads</h6>
             <h1 className="pt-2 text-white font-extrabold text-6xl">29.6M</h1>
