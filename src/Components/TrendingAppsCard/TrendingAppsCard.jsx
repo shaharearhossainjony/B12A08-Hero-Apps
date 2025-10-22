@@ -1,28 +1,41 @@
-import React from "react";
-import DownloadImg from '../../assets/downloadimg.png'
-import RatingImg from '../../assets/star.png'
 
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import DownloadImg from "../../assets/downloadimg.png";
+import RatingImg from "../../assets/star.png";
 
 const TrendingAppsCard = ({ app }) => {
-  console.log(app);
+  const navigate = useNavigate();
+
+  const FormatNum = (number) => {
+    if (number >= 1000000) {
+      return (number / 1000000).toFixed(1).replace(/\.0$/, "") + "M+";
+    } else if (number >= 1000) {
+      return (number / 1000).toFixed(1).replace(/\.0$/, "") + "K+";
+    } else {
+      return number.toString();
+    }
+  };
+
   return (
-    <div className="">
-      <div  className="w-70  rounded-xl shadow-2xl hover:scale-105 transition ease-in-out">
-        <img src={app.image} className="rounded-2xl p-2"></img>
-        <h1 className="font-bold text-2xl text-center">{app.title}</h1>
-
-        <div className='flex justify-between px-5 mt-5 gap-2'>
-
-          <div className='flex items-center btn border-[#00D390] mb-5'>
-            <img className='h-5' src={DownloadImg}></img>
-            <button className='text-[#00D390] mb-2'> {app.downloads}</button>
-            </div>
-
-             <div className='flex items-center  btn border-[#FF8811] '>
-            <img className='h-5' src={RatingImg}></img>
-            <button className=' text-[#FF8811] mb-2'> {app.ratingAvg}</button>
-            </div>
-        
+    <div
+      onClick={() => navigate(`/apps/${app.id}`)}
+      className="card bg-base-100 shadow-xl hover:scale-105 transition ease-in-out mb-10 cursor-pointer"
+    >
+      <figure>
+        <img className="p-2 rounded-xl" src={app.image} alt={app.title} />
+      </figure>
+      <div className="card-body">
+        <h2 className="card-title text-center">{app.title}</h2>
+        <div className="flex justify-between space-x-2">
+          <button className="btn border-[#00D390] text-[#00D390]">
+            <img src={DownloadImg} alt="Downloads" />
+            {FormatNum(app.downloads)}
+          </button>
+          <button className="btn border-[#FF8811] text-[#FF8811]">
+            <img src={RatingImg} alt="Rating" />
+            {app.ratingAvg}
+          </button>
         </div>
       </div>
     </div>
@@ -30,3 +43,9 @@ const TrendingAppsCard = ({ app }) => {
 };
 
 export default TrendingAppsCard;
+
+
+
+
+
+

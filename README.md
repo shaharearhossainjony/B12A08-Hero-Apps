@@ -1,16 +1,22 @@
-# React + Vite
+# 🚀 Hero.IO
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📱 App Name  
+**Hero.IO**
 
-Currently, two official plugins are available:
+## 📝 Description  
+**Hero.IO** is a modern, React-based application that showcases a curated list of software or mobile apps with search functionality and smooth navigation. Users can easily explore apps, filter them using a live search bar, and view detailed information. If no matching apps are found, the UI gracefully displays an error image and message, along with an option to return to the full app list.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🔑 Key Features
+- Live search to instantly filter apps by name  
+- Individual app detail routing with React Router  
+- "No Results Found" screen with user-friendly feedback  
+- Persistent navigation to `/apps` for consistent back behavior  
+- Sleek and responsive UI optimized for all screen sizes  
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠 Technologies  
+- **React** – Component-based UI framework  
+- **React Router DOM** – SPA routing for navigating between pages  
+- **Tailwind CSS** – Utility-first CSS framework for modern styling  
+- **Custom Hooks** – `useProducts` for fetching and managing product data  
+- **JavaScript (ES6+)** – Modern JavaScript features  
+- **Assets** – Custom icons and images for downloads, ratings, and error handling

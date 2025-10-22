@@ -4,16 +4,23 @@ import AppleStoreLogo from "../../assets/AppleLogo.png";
 import HeroImage from "../../assets/hero.png";
 import useProducts from "../../Hooks/useProducts";
 import TrendingAppsCard from "../TrendingAppsCard/TrendingAppsCard";
-import DownloadImg from '../../assets/downloadimg.png'
-import RatingImg from '../../assets/star.png'
-
-
+import { Link } from "react-router-dom";
 
 const Home = () => {
-const {loading , error, products}= useProducts()
+  const { loading, error, products } = useProducts();
 
-const trendingApps = products.slice(0, 8)
-console.log(trendingApps);
+  const trendingApps = products.slice(0, 8);
+
+  const FormatNum = (number) => {
+  if (number >= 1000000) {
+    return (number / 1000000).toFixed(1).replace(/\.0$/, "") + "M+";
+  } else if (number >= 1000) {
+    return (number / 1000).toFixed(1).replace(/\.0$/, "") + "K+";
+  } else {
+    return number.toString();
+  }
+};
+  
 
   return (
     <div>
@@ -47,7 +54,7 @@ console.log(trendingApps);
         </a>
       </div>
       {/* image div of hero */}
-      <div className="max-w-screen-xl mx-auto my-auto w-full px-4 md:px-8 lg:px-12 pt-10  flex-1">
+      <div className="flex justify-center items-center mt-10">
         <img src={HeroImage}></img>
       </div>
 
@@ -80,12 +87,6 @@ console.log(trendingApps);
         </div>
       </div>
 
-
-
-
-
-
-
       {/* trending app section */}
       <div>
         <div>
@@ -97,37 +98,19 @@ console.log(trendingApps);
           </p>
         </div>
 
-        {/* card for apps section */}
-        <div>
-          {/* {
-            trendingApps.map( app => <TrendingAppsCard key={app.id} app={app}></TrendingAppsCard>)
-          } */}
-          {
-            trendingApps.map(app=> <div  className='flex flex-cols-4'>
-              <div  className="w-70  rounded-xl shadow-2xl hover:scale-105 transition ease-in-out">
-                      <img src={app.image} className="rounded-2xl p-2"></img>
-                      <h1 className="font-bold text-2xl text-center">{app.title}</h1>
-              
-                      <div className='flex justify-between px-5 mt-5 gap-2'>
-              
-                        <div className='flex items-center btn border-[#00D390] mb-5'>
-                          <img className='h-5' src={DownloadImg}></img>
-                          <button className='text-[#00D390] mb-2'> {app.downloads}</button>
-                          </div>
-              
-                           <div className='flex items-center  btn border-[#FF8811] '>
-                          <img className='h-5' src={RatingImg}></img>
-                          <button className=' text-[#FF8811] mb-2'> {app.ratingAvg}</button>
-                          </div>
-                      
-                      </div>
-                    </div>
-                    <button className='btn'>Show All</button>
-            </div>) 
-            }  
-          
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-5 pb-10">
+          {trendingApps.map((app) => (
+            <TrendingAppsCard key={app.id} app={app}></TrendingAppsCard>
+          ))}
+          <div>
+            <Link
+              to="/apps"
+              className=" btn bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white text-xl font-bold"
+            >
+              Show All
+            </Link>
+          </div>
         </div>
-
       </div>
     </div>
   );
