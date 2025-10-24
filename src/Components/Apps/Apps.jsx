@@ -1,20 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useProducts from "../../Hooks/useProducts";
 import TrendingAppsCard from "../TrendingAppsCard/TrendingAppsCard";
 import ErrorAppsImg from "../../assets/App-Error.png";
 import { useNavigate } from "react-router-dom";
+import GlobalLoader from "../GlobalLoader/GlobalLoader";
 
 const Apps = () => {
-  const { products } = useProducts();
+  const { products, loading } = useProducts();
   const [searchTerm, setSearchTerm] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
+  const [filteredApps, setFilteredApps] = useState(products);
 
-  const filteredApps = products.filter((app) =>
-    app.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  useEffect(() => {
+    setIsSearching(true);
+    const timer = setTimeout(() => {
+      const filtered = products.filter((app) =>
+        app.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredApps(filtered);
+      setIsSearching(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [searchTerm, products]);
 
   return (
-    <div className="max-w-screen-xl mx-auto w-full mt-10">
+    <div className="max-w-screen-xl mx-auto w-full mt-10 relative">
+      {(loading || isSearching) && <GlobalLoader />}
       <div className="mb-10">
         <h1 className="font-extrabold text-5xl text-center bg-gradient-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent">
           Our All Applications
