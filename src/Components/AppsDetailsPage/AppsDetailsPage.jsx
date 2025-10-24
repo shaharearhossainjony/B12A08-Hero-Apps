@@ -54,7 +54,7 @@ const AppsDetailsPage = () => {
 
   return (
     <div className="m-10">
-      <div className="flex border-b-2 pb-10 border-[#9F62F2]">
+      <div className="flex  border-b-2 pb-10 border-[#9F62F2]">
         <div>
           <img className="rounded-2xl" src={app.image} alt={app.title} />
         </div>
