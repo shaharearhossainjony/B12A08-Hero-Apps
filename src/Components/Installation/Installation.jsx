@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
-import {
-  loadInstalledAppList,
-  removeFromAppList,
-} from "../../Utilities/LocalStorage";
+import { loadInstalledAppList, removeFromAppList } from "../../Utilities/LocalStorage";
 import DownloadImg from "../../assets/downloadimg.png";
 import RatingImg from "../../assets/star.png";
-
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
+import GlobalLoader from "../GlobalLoader/GlobalLoader";
 
 const Installation = () => {
   const [appList, setAppList] = useState(() => loadInstalledAppList());
   const [sortOrder, setSortOrder] = useState("none");
+  const [isSorting, setIsSorting] = useState(false);
 
   useEffect(() => {
-    const sorted = sortApps(appList, sortOrder);
-    setAppList(sorted);
+    setIsSorting(true);
+    const timer = setTimeout(() => {
+      const sorted = sortApps(appList, sortOrder);
+      setAppList(sorted);
+      setIsSorting(false);
+    }, 500);
+    return () => clearTimeout(timer);
   }, [sortOrder]);
 
   const sortApps = (apps, order) => {
@@ -26,9 +29,7 @@ const Installation = () => {
     } else {
       return apps;
     }
- 
   };
-
 
   const handleUninstall = (id, title) => {
     removeFromAppList(id);
@@ -48,8 +49,8 @@ const Installation = () => {
   };
 
   return (
-    <div className="min-h-screen px-5">
-     
+    <div className="min-h-screen px-5 relative">
+      {isSorting && <GlobalLoader />}
       <div className="my-10 text-center">
         <h1 className="font-extrabold text-5xl bg-gradient-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent">
           Your Installed Apps
@@ -59,7 +60,6 @@ const Installation = () => {
         </p>
       </div>
 
-     
       <div className="flex justify-between py-5 items-center border-b border-[#632EE3]">
         <h1 className="font-bold text-2xl bg-gradient-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent">
           {appList.length} App{appList.length !== 1 && "s"} Found
@@ -76,7 +76,6 @@ const Installation = () => {
         </select>
       </div>
 
-     
       <div className="flex flex-col gap-5 my-10">
         {appList.length === 0 ? (
           <p className="text-center text-[#632EE3]">No apps installed yet!</p>
@@ -86,33 +85,27 @@ const Installation = () => {
               key={app.id}
               className="flex items-center justify-between bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all"
             >
-            
               <img
                 src={app.image}
                 alt={app.title}
                 className="w-16 h-16 rounded-md object-cover"
               />
 
-             
               <div className="flex-1 mx-4">
                 <h2 className="text-xl font-bold text-gray-800">{app.title}</h2>
                 <div className="text-sm text-gray-500 flex gap-4 mt-1">
                   <div className="flex gap-2 text-black">
-                    {" "}
                     <img className="h-5" src={DownloadImg}></img>
                     <span>{FormatNum(app.downloads)}</span>
                   </div>
                   <div className="flex gap-2 text-black">
-                    {" "}
                     <img className="h-5" src={RatingImg}></img>
                     <span>{app.ratingAvg}</span>
                   </div>
-
                   <span className="text-black">{app.size} MB</span>
                 </div>
               </div>
 
-              
               <button
                 onClick={() => handleUninstall(app.id, app.title)}
                 className="btn bg-[#00D390] hover:bg-red-600 text-white font-bold rounded-md px-4 py-2"
